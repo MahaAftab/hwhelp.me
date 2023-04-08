@@ -156,7 +156,7 @@ h6,
 }
 
 #main {
-  margin-top: 50px;
+  margin-top: 75px;
 }
 
 
@@ -374,22 +374,25 @@ h6,
 
 /* CAROUSEL CSS START */
 
+
 .carousel-item {
-  padding: 1rem;
-  text-align: center;
+  /* display: flex; */
+  justify-content: center;
 }
 
 .card {
-  color: black;
-  border-radius: 1rem;
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+  /* flex: 1; */
+  color: #000;
+  margin: 0 1rem;
+  border-radius: 1rem 1rem 1rem 1rem;
+  box-shadow: 0 0 0.5rem o.5rem rgba(0, 0, 0, 0.3);
+
 }
 
 .card-img-top {
+  height: 200px;
   object-fit: cover;
-  border-radius: 1rem 1rem 0 0;
-  max-height: 200px;
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+
 }
 
 .card-body {
@@ -1745,6 +1748,7 @@ section {
 
 .cardd {
   margin-bottom: 10px;
+  width: 200px;
 }
 
 .cardd-img-top {
@@ -1755,6 +1759,7 @@ section {
 
 .cardd-body {
   padding: 1rem;
+  padding-left: 0;
 }
 
 .cardd-title {
@@ -1771,4 +1776,31 @@ section {
 /* Additional CSS for the second row */
 .row2 {
   margin-top: 30px;
+}
+
+/* ALGEBRA CSS */
+.inner-page {
+  display: flex;
+}
+
+.left-card {
+  flex: 1;
+}
+
+.right-card {
+  flex: 2;
+  margin-left: 2rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  width: 36rem;
+}
+.chapter{
+  padding: 25px;
+  margin: 15px;
+  box-shadow: #2e2525;
+  background-color: #f3f1f1;
+  font-size: larger;
+  font-weight: 600;
+
 }
