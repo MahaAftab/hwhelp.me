@@ -32,14 +32,15 @@ if(isset($_POST['submit']))
       $uni_id = $_POST['uni_id'];
       $exam_title = $_POST['exam_title'];
       $exam_id = $_POST['exam_id'];
+      $exam_ques = $_POST['exam_ques'];
       
       //Query for data updation
    
-      $query = mysqli_query($con, "UPDATE `pastexam` SET UniversityID='$uni_id', courseid='$course_id', examid='$exam_id', examtittle='$exam_title' WHERE id='$eid'");
+      $query = mysqli_query($con, "UPDATE `pastexam` SET UniversityID='$uni_id', courseid='$course_id', examid='$exam_id', examtittle='$exam_title',examquesimg='$exam_ques' WHERE id='$eid'");
 
     if ($query) {
     echo "<script>alert('You have successfully update the data');</script>";
-    echo "<script type='text/javascript'> document.location ='add_past_exam.php'; </script>";
+    echo "<script type='text/javascript'> document.location ='add_past_paper.php'; </script>";
   }
   else
     {
@@ -83,28 +84,17 @@ while ($row=mysqli_fetch_array($ret)) {
                   
                 
                   
-                      <a href="include/change-examdimg-image.php?userid=<?php echo $row['id'];?>">Change Image</a>
+                  
 
                     </div> 
                  
                     <div class="form-group">
-                      <label>Exam questions</label>
-                      <input type="text" class="form-control"  value="<?php  echo $row['examquesimg'];?>"readonly>
+                      <label>Exam Description</label>
+                      <input type="text" class="form-control" name="exam_ques"  value="<?php  echo $row['examquesimg'];?>">
                    
-                  
-                  <a href="include/change-image2.php?userid=<?php echo $row['id'];?>">Change Image</a>
-
-                    
-                    </div>
+                   </div>
                 
-                    <div class="form-group">
-                      <label>Exam Answer</label>
-                      <input type="text" class="form-control"  value="<?php  echo $row['examanswer'];?>"readonly>
-                  
-                  
-                  <a href="include/change-image3.php?userid=<?php echo $row['id'];?>">Change Image</a>
-
-                    </div>
+                 
                   
                     <button type="submit" class="btn btn-success btn-lg btn-block " name="submit">Update</button>
                   </div>            

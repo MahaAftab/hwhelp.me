@@ -52,6 +52,7 @@
                     <label>Course Name</label>
                     <input type="text" class="form-control" required="" id="course_name" name="course_name">
                   </div>
+                 
                   <div class="form-group">
                     <label>University Name</label>
                     <input type="text" class="form-control" required="" id="uni_name" name="uni_name">
@@ -100,6 +101,7 @@
                   <th scope="col">University Id</th>
                   <th scope="col">Course Name</th>
                   <th scope="col">University Name</th>
+                 
                   
                   <th scope="col">Edit</th>
                 </tr>
@@ -118,7 +120,8 @@
                                 <td> <?php echo $row['UniversityID']; ?> </td>
                                 <td> <?php echo $row['coursename']; ?> </td>
                                 <td> <?php echo $row['universityname']; ?> </td>
-                              
+                            
+                                
                                 <td>
                           
                                     <button type="button" class="btn btn-success editbtn"> <i class="fa fa-edit"></i> </button>
@@ -158,7 +161,7 @@
                 </div>
                 <div class="modal-body">
                   <div class="card-body">
-                  <form action="insert_course.php" autocomplete="off" method="POST">
+                  <form action="insert_course.php" autocomplete="off" method="POST"enctype="multipart/form-data">
                   <input type="hidden" class="form-control" id="id" name="id">
                       
                     <div class="form-group">
@@ -173,10 +176,11 @@
                     <label>Course Name</label>
                     <input type="text" class="form-control" required="" id="course_name" name="course_name">
                   </div>
-                  <div class="form-group">
+                
                     <label>University Name</label>
-                    <input type="text" class="form-control" required="" id="uni_name" name="uni_name">
-                  </div>
+                    <input type="text" class="form-control" id="uni_name" name="uni_name">
+                  </div> <div class="form-group">
+                 
                
 
                 </div>

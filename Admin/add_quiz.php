@@ -1,15 +1,22 @@
 <?php
 require 'config.php';
-  $UniversityIDs = [''];
-  $query1= "SELECT * FROM `university`";
-  $res1 = $con->query($query1);
-  if ($res1->num_rows > 0) {
-      while($row1 = $res1->fetch_assoc()) {
-        $UniversityIDs[$row1["UniversityID"]] = $row1["Universityname"];
-      }
-  }
 
-  
+$courseids= [''];
+$query2= "SELECT * FROM `courses`";
+$res2 = $con->query($query2);
+if ($res2->num_rows > 0) {
+    while($row2 = $res2->fetch_assoc()) {
+        $courseids[$row2["courseid"]] = $row2["coursename"];
+    }
+}
+$UniversityIDs = [''];
+$query1= "SELECT * FROM `university`";
+$res1 = $con->query($query1);
+if ($res1->num_rows > 0) {
+    while($row1 = $res1->fetch_assoc()) {
+        $UniversityIDs[$row1["UniversityID"]] = $row1["Universityname"];
+    }
+}
 
   
   ?>
@@ -125,7 +132,10 @@ require 'config.php';
             </div>
           </section>
 
-       
+          <td>
+                          
+                                <a href="edit.php?editid=<?php echo htmlentities ($row['id']);?>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                             </td>
 
         
         <!-- Modal with form -->
@@ -146,11 +156,20 @@ require 'config.php';
                     
                     <input type="hidden" name="id" id="id">
                            <div class="form-group">
-                        <label>Course Id</label>
-                        <input type="text" class="form-control"required="" id="course_id" name="course_id">
-                    </div>
+
+                    <div class="form-group">
+                        <label>Course</label>
+                        <select  style="padding:5px" id="course_id" name="course_id" class="form-control">
+                                    <?php
+                                        foreach($courseids as $key => $courseid) { ?>
+                                    <option value="<?php echo $key ?>"><?php echo $courseid ?></option>
+                                    <?php }
+                                    ?>
+
+                                </select>
+                      </div>
                       <div class="form-group">
-                        <label>University Id</label>
+                        <label>University</label>
                         <select  style="padding:5px" id="uni_id" name="uni_id" class="form-control">
                                     <?php
                                         foreach($UniversityIDs as $key => $UniversityID) { ?>

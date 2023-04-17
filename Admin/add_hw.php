@@ -1,3 +1,22 @@
+<?php
+require 'config.php';
+  $UniversityIDs = [''];
+  $query1= "SELECT * FROM `university`";
+  $res1 = $con->query($query1);
+  if ($res1->num_rows > 0) {
+      while($row1 = $res1->fetch_assoc()) {
+        $UniversityIDs[$row1["UniversityID"]] = $row1["Universityname"];
+      }
+  }
+  $courseids= [''];
+  $query2= "SELECT * FROM `courses`";
+  $res2 = $con->query($query2);
+  if ($res2->num_rows > 0) {
+      while($row2 = $res2->fetch_assoc()) {
+          $courseids[$row2["courseid"]] = $row2["coursename"];
+      }
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,14 +59,29 @@
                       <form action="insert_hw.php" autocomplete="off" method="POST" enctype="multipart/form-data">
                         <div class="card-body">
                             <input type="hidden" class="form-control" id="id">
-                        <div class="form-group">
-                            <label>Course Id</label>
-                            <input type="text" class="form-control" id="course_id" name="course_id">
-                        </div>
-                        <div class="form-group">
-                          <label>University Id</label>
-                          <input type="text" class="form-control" required="" id="uni_id" name="uni_id">
-                        </div>
+                            <div class="form-group">
+                        <label>Course</label>
+                        <select  style="padding:5px" id="course_id" name="course_id" class="form-control">
+                                    <?php
+                                        foreach($courseids as $key => $courseid) { ?>
+                                    <option value="<?php echo $key ?>"><?php echo $courseid ?></option>
+                                    <?php }
+                                    ?>
+
+                                </select>
+                      </div>
+                      <div class="form-group">
+                        <label>University</label>
+                        <select  style="padding:5px" id="uni_id" name="uni_id" class="form-control">
+                                    <?php
+                                        foreach($UniversityIDs as $key => $UniversityID) { ?>
+                                    <option value="<?php echo $key ?>"><?php echo $UniversityID ?></option>
+                                    <?php }
+                                    ?>
+
+                                </select>
+                      </div>
+                     
                         <div class="form-group">
                           <label>Upload Homework Image</label>
                           <input type="file" class="form-control" required="" id="hw_img" name="hw_img">
@@ -130,11 +164,10 @@
                 </div>
 
                 <?php
-                $connection = mysqli_connect("localhost","root","");
-                $db = mysqli_select_db($connection, 'hwhelp');
+               
 
                 $query = "SELECT * FROM homework";
-                $query_run = mysqli_query($connection, $query);
+                $query_run = mysqli_query($con, $query);
             ?>
 
                 <table class="table table-striped" id="course_tbl">

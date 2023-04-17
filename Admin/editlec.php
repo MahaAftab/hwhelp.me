@@ -67,11 +67,11 @@ while ($row = mysqli_fetch_array($ret)) {
             <label>Lecture Title</label>
             <input type="text" class="form-control" id="lec_title" name="lec_title" value="<?php echo $row['lectittle']; ?>">
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
                     <label>Upload Lecture Image</label>
                     <input type="text" class="form-control"  id="upload_lec_img" name="upload_lec_img"value="<?php  echo $row['lecdimg'];?>">
                     <a href="include/change-img-lec.php?userid=<?php echo $row['id'];?>">Change Image</a>
-                  </div>
+                  </div> -->
                   <div class="form-group">
                     <label>Upload Lecture Documents</label>
                     <input type="text" class="form-control"  id="upload_doc" name="upload_doc"value="<?php  echo $row['lecdocuments'];?>">

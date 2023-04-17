@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Admin Dashboard</title>
+  <title>Add Univeristy</title>
   <!-- General CSS Files -->
   <link rel="stylesheet" href="assets/css/app.min.css">
   <!-- Template CSS -->
@@ -23,68 +23,17 @@
 ?>
 
       </div>
-  <!-- <div class="loader"></div> -->
-  <div id="app">
-    <div class="main-wrapper main-wrapper-1">
-      <div class="navbar-bg"></div>
-      <!DOCTYPE html>
-<html lang="en">
 
 
-<head>
-  <meta charset="UTF-8">
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Admin Dashboard</title>
-  <!-- General CSS Files -->
-  <link rel="stylesheet" href="assets/css/app.min.css">
-  <!-- Template CSS -->
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/components.css">
-  <!-- Custom style CSS -->
-  <link rel="stylesheet" href="assets/css/custom.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel='shortcut icon' type='image/x-icon' href='assets/img/favicon.ico' />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
-</head>
 
-<body>
 
 
    <!-- Main Content -->
        <div class="main-content">
        
 
-                  <!-- Modal - EDIT UNIVERSITY-->
-
-              <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="formModal"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="formModal">Edit University</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-
-                      <form action="update_uni.php" autocomplete="off" method="POST">
-                      <input type="hidden" name="id" id="id">
-                        <div class="form-group">
-                          <label>Univeristy Id</label>
-                          <input type="text" class="form-control" placeholder="Enter University Id" id="uni_id" name="uni_id">
-                        </div>
-                        <div class="form-group">
-                          <label>Name</label>
-                            <input type="text" class="form-control" placeholder="Enter Univerity Name" id="uni_name" name="uni_name" >
-                        </div>
-                        <button type="submit" class="btn btn-primary m-t-15 waves-effect" value="Submit" id="editbtn" name="editbtn">Save</button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        
              
               <!-- Modal - ADD UNIVERSITY-->
 
@@ -100,7 +49,7 @@
                     </div>
                     <div class="modal-body">
 
-                      <form action="insert_uni.php" autocomplete="off" method="POST">
+                      <form action="insert_uni.php" autocomplete="off" method="POST" enctype="multipart/form-data">
                       <input type="hidden" name="id" id="id">
                         <div class="form-group">
                           <label>Univeristy Id</label>
@@ -114,7 +63,18 @@
                             <input type="text" class="form-control" placeholder="Enter Univerity Name" id="uni_name" name="uni_name">
                           </div>
                         </div>
-                      
+                        <div class="form-group">
+                          <label>Unidetails</label>
+                            <input type="text" class="form-control" placeholder="Enter Univerity Details" id="uni_details" name="uni_details" >
+                        </div>
+                        <div class="form-group">
+                          <label>thumbnailimg</label>
+                            <input type="file" class="form-control" placeholder="Thumbnail-img" id="uni_img" name="uni_img" >
+                        </div>
+                        <div class="form-group">
+                          <label>Main page img</label>
+                            <input type="file" class="form-control" placeholder="Main page img(optional)" id="main_img" name="main_img" >
+                        </div>
                         <button type="submit" class="btn btn-primary m-t-15 waves-effect" value="Submit" id="addButton" name="addButton">Submit</button>
                       </form>
                     </div>
@@ -180,6 +140,9 @@
                       <th scope="col">Id</th>
                       <th scope="col">University Id</th>
                       <th scope="col">University Name</th>
+                      <th scope="col">University details</th>
+                      <th scope="col">Thumbnail img</th>
+                      <th scope="col">Main page img</th>
                       <th scope="col">Edit</th>
                       <th scope="col">Delete</th>
                     </tr>
@@ -197,9 +160,13 @@
                                 <td> <?php echo $row['id']; ?> </td>
                                 <td> <?php echo $row['UniversityID']; ?> </td>
                                 <td> <?php echo $row['Universityname']; ?> </td>
+                                <td> <?php echo $row['Universitydetail']; ?> </td>
+                                <td> <?php echo $row['Universityimg']; ?> </td>
+                                <td> <?php echo $row['Universitymainimg']; ?> </td>
                                 <td>
-                          
-                                    <button type="button" class="btn btn-success editbtn"> <i class="fa fa-edit"></i> </button>
+                                <a href="edituni2.php?editid=<?php echo htmlentities ($row['id']);?>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                     
+                                    
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-danger deletebtn"> <i class="fa fa-trash"></i> </button>
@@ -222,7 +189,8 @@
                 </div>
               </section>
 
-       
+              <a href="edituni2.php?editid=<?php echo htmlentities ($row['id']);?>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                     
       </div>
       <footer class="main-footer">
         <div class="footer-left">
@@ -260,30 +228,6 @@
     
 
 
-    <script>
-        $(document).ready(function () {
-          $('.editbtn').on('click', function () {
-           
-
-$('#editmodal').modal('show');
-
-$tr = $(this).closest('tr');
-            $tr = $(this).closest('tr');
-            var data = $tr.children("td").map(function () {
-            return $(this).text();
-          }).get();
-
-          console.log(data);
-
-          $('#id').val(data[0]);
-          $('#uni_id').val(data[1]);
-          $('#uni_name').val(data[2]);
-
-         
-        });
-        });
-   
-    </script>
  <script>
         $(document).ready(function () {
 

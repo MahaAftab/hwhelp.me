@@ -9,7 +9,14 @@ if ($res1->num_rows > 0) {
       $UniversityIDs[$row1["UniversityID"]] = $row1["Universityname"];
     }
 }
-
+$courseids= [''];
+$query2= "SELECT * FROM `courses`";
+$res2 = $con->query($query2);
+if ($res2->num_rows > 0) {
+    while($row2 = $res2->fetch_assoc()) {
+        $courseids[$row2["courseid"]] = $row2["coursename"];
+    }
+}
 
 
 ?>
@@ -63,15 +70,15 @@ if ($res1->num_rows > 0) {
                   <th scope="col">UniveristyId</th>
                   <th scope="col">Exam Id</th>
                   <th scope="col">exam Tittle</th>
+                  <th scope="col">Exam Description</th>
+
                   <th scope="col">Exam Image</th>
               
-                <th scope="col">Question img</th>
-
-                  <th scope="col">Answer img</th>
+              
                  
                 
                   <th scope="col">Edit</th>
-                  
+                  <th scope="col">Delete</th>                  
                   
                 </tr>
               </thead>
@@ -97,10 +104,10 @@ if ($res1->num_rows > 0) {
 <td> <?php echo $row['UniversityID']; ?> </td>
 <td> <?php echo $row['examid']; ?> </td>
 <td> <?php echo $row['examtittle']; ?> </td>
+<td> <?php echo $row['examquesimg']; ?> </td>
 <td> <?php echo $row['examdimg']; ?> </td>
 
-<td> <?php echo $row['examanswer']; ?> </td>
-<td> <?php echo $row['examquesimg']; ?> </td>
+
 
                                 
                                 <td>
@@ -147,12 +154,22 @@ if ($res1->num_rows > 0) {
                 
                     
                     <input type="hidden" name="id" id="id">
-                           <div class="form-group">
-                           <label>Course id</label>
-                        <input type="text" class="form-control"required="" id="course_id" name="course_id">
-                    </div>
+                   
+    <input type="hidden" name="exam_id" id="exam_id" value="<?php echo $exam_id; ?>">
+   
+                    <div class="form-group">
+                        <label>Course</label>
+                        <select  style="padding:5px" id="course_id" name="course_id" class="form-control">
+                                    <?php
+                                        foreach($courseids as $key => $courseid) { ?>
+                                    <option value="<?php echo $key ?>"><?php echo $courseid ?></option>
+                                    <?php }
+                                    ?>
+
+                                </select>
+                      </div>
                       <div class="form-group">
-                        <label>University Id</label>
+                        <label>University</label>
                         <select  style="padding:5px" id="uni_id" name="uni_id" class="form-control">
                                     <?php
                                         foreach($UniversityIDs as $key => $UniversityID) { ?>
@@ -163,6 +180,7 @@ if ($res1->num_rows > 0) {
                                 </select>
                       </div>
                      
+                     
                       <div class="form-group">
                         <label>exam Id</label>
                         <input type="text" class="form-control" required="" id="exam_id" name="exam_id">
@@ -170,6 +188,10 @@ if ($res1->num_rows > 0) {
                       <div class="form-group">
                         <label>exam Title</label>
                         <input type="text" class="form-control" required="" id="exam_title" name="exam_title">
+                      </div>
+                      <div class="form-group">
+                        <label>Exam description</label>
+                        <input type="text" class="form-control"  id="exam_ques" name="exam_ques">
                       </div>
                       <div class="form-group">
                         <label>Upload exam Image</label>
@@ -180,15 +202,9 @@ if ($res1->num_rows > 0) {
                       </div> 
                    
                     
-                     <div class="form-group">
-                        <label>exam Question</label>
-                        <input type="file" class="form-control"  id="exam_ques" name="exam_ques">
-                      </div>
                      
-                      <div class="form-group">
-                        <label>exam Answer</label>
-                        <input type="file" class="form-control"  id="exam_ans" name="exam_ans">
-                      </div>
+                     
+                   
                       
                      
                     

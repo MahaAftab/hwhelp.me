@@ -1,35 +1,43 @@
 <?php include 'header.php';
   require 'config.php';
 
- 
-if(isset($_POST['addvedio']))
-{
-    $id=$_POST['id'];
-    $course_id=$_POST['course_id'];
-    $uni_id=$_POST['uni_id'];
-    $video_id=$_POST['video_id'];
-    $video_title=$_POST['video_title'];
-    $video_dec=$_POST['video_dec'];
-    $upload_video=$_POST['upload_video'];
+  $UniversityIDs = [''];
+  $query1= "SELECT * FROM `university`";
+  $res1 = $con->query($query1);
+  if ($res1->num_rows > 0) {
+      while($row1 = $res1->fetch_assoc()) {
+        $UniversityIDs[$row1["UniversityID"]] = $row1["Universityname"];
+      }
+  }
+
+// if(isset($_POST['addvedio']))
+// {
+//     $id=$_POST['id'];
+//     $course_id=$_POST['course_id'];
+//     $uni_id=$_POST['uni_id'];
+//     $video_id=$_POST['video_id'];
+//     $video_title=$_POST['video_title'];
+//     $video_dec=$_POST['video_dec'];
+//     $upload_video=$_POST['upload_video'];
 
 
 
 
 
-    $query = "INSERT INTO `vedio` (`courseid`,`UniversityId`,`vedioid`,`vediotittle`,`vediodescription`,`vedio`,`id`)
-     VALUES ('$course_id','$uni_id','$video_id','$video_title','$video_dec','$upload_video',NULL)";
-    $query_run = mysqli_query($con, $query);
+//     $query = "INSERT INTO `vedio` (`courseid`,`UniversityId`,`vedioid`,`vediotittle`,`vediodescription`,`vedio`,`id`)
+//      VALUES ('$course_id','$uni_id','$video_id','$video_title','$video_dec','$upload_video',NULL)";
+//     $query_run = mysqli_query($con, $query);
     
-    if($query_run)
-    {
-        echo '<script> alert("Data Saved"); </script>';
-        header('Location: add_video.php');
-    }
-    else
-    {
-        echo '<script> alert("Data Not Saved"); </script>';
-    }
-}
+//     if($query_run)
+//     {
+//         echo '<script> alert("Data Saved"); </script>';
+//         header('Location: add_video.php');
+//     }
+//     else
+//     {
+//         echo '<script> alert("Data Not Saved"); </script>';
+//     }
+// }
 
 
 
@@ -80,10 +88,17 @@ if(isset($_POST['addvedio']))
                         <label>Course Id</label>
                         <input type="text" class="form-control" id="course_id" name="course_id" >
                     </div>
-                          <div class="form-group">
-                            <label>University Id</label>
-                            <input type="text" class="form-control" id="uni_id" name="uni_id">
-                          </div>
+                    <div class="form-group">
+                        <label>University</label>
+                        <select  style="padding:5px" id="uni_id" name="uni_id" class="form-control">
+                                    <?php
+                                        foreach($UniversityIDs as $key => $UniversityID) { ?>
+                                    <option value="<?php echo $key ?>"><?php echo $UniversityID ?></option>
+                                    <?php }
+                                    ?>
+
+                                </select>
+                      </div>
                           <div class="form-group">
                             <label>Video Id</label>
                             <input type="text" class="form-control" id="video_id" name="video_id">
@@ -199,7 +214,7 @@ if(isset($_POST['addvedio']))
               </div>
               <div class="modal-body">
                 <div class="card-body">
-                <form action="" autocomplete="off" method="POST">
+                <form action="insertvedio.php" autocomplete="off" method="POST" enctype="multipart/form-data">
                         <div class="card-header">
                           <h4>Add Video</h4>
                         </div>
